@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.*" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.0.9" />
+    <PackageReference Include="Clancey.SimpleAuth" Version="1.0.49" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="AdaptiveCards" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BotFramework.NET">
+      <HintPath>..\external\BotFramework.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="BotFramework.UI.Forms">
+      <HintPath>..\external\BotFramework.UI.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
