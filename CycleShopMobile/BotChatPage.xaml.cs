@@ -13,7 +13,7 @@ namespace CycleShopMobile
 {
     public partial class BotChatPage : ContentPage
     {
-        string name = "Clancey";
+        string name = "Nate";
         public BotChatPage()
         {
             InitializeComponent();
