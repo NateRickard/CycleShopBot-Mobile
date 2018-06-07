@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="CycleShopMobile.DashboardPage"
+             Title="Dashboard"
+             Icon="dashboard.png"
+             BackgroundColor="#3B6F33">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0"  />
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Image Source="bikeshopheader.png"/>
+            <StackLayout Orientation="Horizontal" Padding="20,15,0,0">
+                <Image Source="geolocation.png"/>
+                <Label x:Name="LocationLabel" Text="locating..." TextColor="White" FontSize="Large"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Padding="20,40,0,0">
+                <Label x:Name="RegionLabel" Text="Southeast Region" TextColor="White" FontSize="Large" FontAttributes="Bold" IsVisible="false"/>
+                <StackLayout Orientation="Vertical" Padding="20,10,0,0">
+                    <Label x:Name="EmployeesLabel" Text="Employees: 6" TextColor="White" FontSize="Medium" IsVisible="false"/>
+                    <Label x:Name="SalesLabel" Text="May Sales: $428,082 ▲3.2%" TextColor="White" FontSize="Medium" IsVisible="false"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

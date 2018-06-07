@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns:m="clr-namespace:BotChat" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BotFramework.UI;assembly=BotFramework.UI.Forms" x:Class="CycleShopMobile.BotChatPage">
+             xmlns:local="clr-namespace:BotFramework.UI;assembly=BotFramework.UI.Forms" 
+             x:Class="CycleShopMobile.BotChatPage"
+             Title="CycleBot" Icon="chatbot.png">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0"  />
+    </ContentPage.Padding>
 	<StackLayout>
-		<Button x:Name="StartStopButton" Text="Start Conversation" Clicked="StartStopConversation" />
+		<!--<Button x:Name="StartStopButton" Text="Cycle Shop Bot" Clicked="StartStopConversation" BackgroundColor="White"/>-->
 		<ListView x:Name="MessageList" SeparatorVisibility="None" HasUnevenRows="true" ItemTapped="Handle_ItemTapped">
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -10,15 +15,13 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<Grid>
+        <Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="5*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<Button Text="+" Grid.Column="0" Clicked="AddPhoto" />
-			<Entry x:Name="Text" Grid.Column="1" Completed="SendMessage" />
-			<Button Text="Send" Clicked="SendMessage" Grid.Column="2" />
+			<Entry x:Name="Text" Grid.Column="0" Completed="SendMessage" />
+			<Button Text="▶️" Clicked="SendMessage" Grid.Column="1" BackgroundColor="White" />
 		</Grid>
 	</StackLayout>
 </ContentPage>

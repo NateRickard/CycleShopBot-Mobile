@@ -11,7 +11,8 @@ namespace CycleShopMobile
 		{
 			InitializeComponent();
 
-            MainPage = new BotChatPage();
+            //MainPage = new BotChatPage();
+            MainPage = new Homepage();
 		}
 
 		protected override void OnStart()

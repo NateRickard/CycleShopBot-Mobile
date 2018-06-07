@@ -23,7 +23,9 @@ namespace CycleShopMobile
                 ((ListView)sender).SelectedItem = null;
             };
         }
+
         ConversationManager currentConversation;
+
         async void StartStopConversation(object sender, System.EventArgs e)
         {
             try
@@ -59,7 +61,7 @@ namespace CycleShopMobile
                 currentConversation.CardActionTapped = HandleCardActionTapped;
                 MessageList.ItemsSource = currentConversation.Conversation.Messages;
                 currentConversation.Conversation.Messages.CollectionChanged += Messages_CollectionChanged;
-                StartStopButton.Text = "End Conversation";
+                //StartStopButton.Text = "End Conversation";
             }
             catch (Exception ex)
             {
@@ -98,7 +100,7 @@ namespace CycleShopMobile
             currentConversation.CardActionTapped = null;
             currentConversation = null;
             MessageList.ItemsSource = null;
-            StartStopButton.Text = "Start Conversation";
+            //StartStopButton.Text = "Start Conversation";
         }
 
         async void SendMessage(object sender, System.EventArgs e)
