@@ -3,5 +3,5 @@
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<application android:label="CycleShopMobile.Android"></application>
+	<application android:label="CycleShopMobile.Android" android:networkSecurityConfig="@xml/network_security_config"></application>
 </manifest>
