@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CycleShopMobile
 {
@@ -10,8 +7,9 @@ namespace CycleShopMobile
         public Homepage()
         {
             InitializeComponent();
-            this.Children.Add(new DashboardPage());
-            this.Children.Add(new BotChatPage());
+
+            Children.Add(new DashboardPage());
+            Children.Add(new BotChatPage());
         }
     }
 }

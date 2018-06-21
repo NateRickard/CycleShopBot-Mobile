@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 using System.Linq;
-
+using System.Diagnostics;
 
 namespace CycleShopMobile
 {
@@ -21,21 +20,17 @@ namespace CycleShopMobile
             StartListening();
         }
 
-
-        async Task StartListening()
+        async void StartListening()
         {
             if (CrossGeolocator.Current.IsListening)
                 return;
 
             await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 10, true);
-
-
         }
 
-        private async void PositionChanged(object sender, PositionEventArgs e)
+        async void PositionChanged(object sender, PositionEventArgs e)
         {
 
-            //If updating the UI, ensure you invoke on main thread
             var position = e.Position;
             //var output = "Full: Lat: " + position.Latitude + " Long: " + position.Longitude;
             //output += "\n" + $"Time: {position.Timestamp}";
@@ -45,6 +40,7 @@ namespace CycleShopMobile
             //output += "\n" + $"Altitude: {position.Altitude}";
             //output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";
             //Debug.WriteLine(output);
+
             try
             {
                 string mapKey = null; //only needed on UWP
@@ -55,15 +51,14 @@ namespace CycleShopMobile
                 RegionLabel.IsVisible = true;
                 SalesLabel.IsVisible = true;
                 EmployeesLabel.IsVisible = true;
-
             }
             catch (Exception ex)
             {
-                //Debug.WriteLine("Unable to get address: " + ex);
+                Debug.WriteLine("Unable to get address: " + ex);
             }
         }
 
-        private void PositionError(object sender, PositionErrorEventArgs e)
+        void PositionError(object sender, PositionErrorEventArgs e)
         {
             //Debug.WriteLine(e.Error);
             //Handle event here for errors

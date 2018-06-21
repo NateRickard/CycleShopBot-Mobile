@@ -20,8 +20,8 @@
 				<ColumnDefinition Width="5*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<Entry x:Name="Text" Grid.Column="0" Completed="SendMessage" />
-			<Button Text="▶️" Clicked="SendMessage" Grid.Column="1" BackgroundColor="White" />
+			<Entry x:Name="Text" Grid.Column="0" Completed="SendMessage" IsEnabled="false" />
+			<Button x:Name="SendButton" Text="▶️" Clicked="SendMessage" Grid.Column="1" BackgroundColor="White" IsEnabled="false" />
 		</Grid>
 	</StackLayout>
 </ContentPage>

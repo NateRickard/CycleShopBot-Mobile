@@ -13,7 +13,6 @@ namespace CycleShopMobile
 {
     public partial class BotChatPage : ContentPage
     {
-        string name = "Nate";
         public BotChatPage()
         {
             InitializeComponent();
@@ -26,7 +25,19 @@ namespace CycleShopMobile
 
         ConversationManager currentConversation;
 
-        async void StartStopConversation(object sender, System.EventArgs e)
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await Task.Delay(100);
+
+            if (currentConversation == null)
+            {
+                await StartConversation();
+            }
+        }
+
+        async void StartStopConversation(object sender, EventArgs e)
         {
             try
             {
@@ -38,18 +49,9 @@ namespace CycleShopMobile
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+
                 foreach (DictionaryEntry m in ex.Data)
                     Debug.WriteLine($"{m.Key} - {m.Value}");
-            }
-        }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            await Task.Delay(100);
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                name = await this.GetAlertText("Hello", "Please enter your name:");
             }
         }
 
@@ -57,21 +59,25 @@ namespace CycleShopMobile
         {
             try
             {
-                currentConversation = await ConversationManager.StartConversation(name, "<< YOUR DIRECTLINE CLIENT SECRET HERE>>");
+                currentConversation = await ConversationManager.StartConversation("Mobile_User", "BoccNPeVmcQ.cwA.540.DsYrCg93pve9DTL_DwZ9TQEwvFc64MU9X2Um-BFODnQ");
                 currentConversation.CardActionTapped = HandleCardActionTapped;
-                MessageList.ItemsSource = currentConversation.Conversation.Messages;
                 currentConversation.Conversation.Messages.CollectionChanged += Messages_CollectionChanged;
-                //StartStopButton.Text = "End Conversation";
+                MessageList.ItemsSource = currentConversation.Conversation.Messages;
+
+                // once we have a conversation, enable our send msg UI
+                SendButton.IsEnabled = true;
+                Text.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                var i = 0;
+                Debug.WriteLine($"Error starting conversation: {ex.Message}");
             }
         }
 
         void Messages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var lastItem = currentConversation.Conversation.Messages.LastOrDefault();
+
             if (lastItem != null)
                 Device.BeginInvokeOnMainThread(() => MessageList.ScrollTo(lastItem, ScrollToPosition.Start, false));
         }
@@ -89,7 +95,7 @@ namespace CycleShopMobile
             }
         }
 
-        private void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var item = (BotActivity)e.Item;
         }
@@ -97,13 +103,13 @@ namespace CycleShopMobile
         async Task EndConversation()
         {
             await currentConversation.EndConversation();
+
             currentConversation.CardActionTapped = null;
             currentConversation = null;
             MessageList.ItemsSource = null;
-            //StartStopButton.Text = "Start Conversation";
         }
 
-        async void SendMessage(object sender, System.EventArgs e)
+        async void SendMessage(object sender, EventArgs e)
         {
             try
             {
@@ -111,24 +117,29 @@ namespace CycleShopMobile
                 {
                     await StartConversation();
                 }
+
                 if (string.IsNullOrWhiteSpace(Text.Text))
                     return;
-                await currentConversation.SendMessage(new Message { Text = Text.Text });
-                Text.Text = "";
+                
+                await currentConversation.SendMessage(Text.Text);
+
+                Text.Text = string.Empty;
             }
             catch (Exception ex)
             {
-                var i = 0;
+                Debug.WriteLine($"Error sending message: {ex.Message}");
             }
         }
 
-        async void AddPhoto(object sender, System.EventArgs e)
+        async void AddPhoto(object sender, EventArgs e)
         {
             Task startTask = null;
+
             if (currentConversation == null)
             {
                 startTask = StartConversation();
             }
+
             try
             {
                 var photo = await CrossMedia.Current.PickPhotoAsync();
