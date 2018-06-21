@@ -57,7 +57,7 @@ namespace CycleShopMobile
         {
             try
             {
-                currentConversation = await ConversationManager.StartConversation(name, "btV0PJ-U4c4.cwA.6AI.FMQTD8RGbUpK9y6158EIQUCZx5MV1FUWiaNsdZ-rdwk");
+                currentConversation = await ConversationManager.StartConversation(name, "<< YOUR DIRECTLINE CLIENT SECRET HERE>>");
                 currentConversation.CardActionTapped = HandleCardActionTapped;
                 MessageList.ItemsSource = currentConversation.Conversation.Messages;
                 currentConversation.Conversation.Messages.CollectionChanged += Messages_CollectionChanged;
